@@ -1,0 +1,99 @@
+.App {
+  text-align: center;
+
+  .App-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+      height: 80px;
+    }
+
+    h2 {
+      color: white;
+    }
+  }
+
+  .App-intro {
+    font-size: large;
+  }
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.field {
+  &.card-content-hidden .ant-card-body {
+    display: none;
+  }
+  .card-actions .ant-btn {
+    margin-left: 8px;
+  }
+  .ant-card-extra {
+    padding: 12px 0;
+  }
+}
+
+.ant-select {
+  width: 400px;
+}
+
+.photo-preview {
+  max-width: 500px;
+  width: auto;
+}
+
+.cv-data {
+  padding: 15px;
+}
+
+.cv-preview {
+  background: lightblue;
+  overflow: scroll;
+}
+
+.cv-document {
+  background: white;
+  // 595 x 842
+  // 794 x 1123
+  width: 794px;
+  height: 1122px;
+  margin: 10px;
+}
+
+.cv-basic {
+  padding: 40px;
+}
+
+@media print { 
+  body {
+  .ant-col-12, .ant-row { display: none; }
+  
+  body, #root, .cv-inside {
+    display: block;
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    background: 0;
+  }
+
+  .cv-preview {
+    overflow: visible;
+  }
+
+  .cv-document {
+    display: block;
+    margin: 0;
+  }
+
+  .cv-document * {
+    display: initial;
+  }
+}
+}
