@@ -5,7 +5,7 @@
     "client": "cd client && yarn start",
     "server": "nodemon app.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "test": "mocha test/*.js"
+    "test": "mocha test/*.js --exit"
   },
   "dependencies": {
     "@types/draft-js": "^0.10.23",
