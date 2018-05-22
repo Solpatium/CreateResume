@@ -5,6 +5,7 @@ script:
 - yarn build
 cache: yarn
 deploy:
+  skip_cleanup: true
   provider: heroku
   app: 
     travis-setup: stark-thicket-65150

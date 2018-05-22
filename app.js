@@ -36,9 +36,7 @@ app.get(`/user`, function (req, res) {
     }
 });
 
-console.log("TESTESTESTESTEST  ")
 if (process.env.NODE_ENV === 'production') {
-    console.log("ADDING STATIC")
     app.use('/', express.static('client/build'))
 }
 
