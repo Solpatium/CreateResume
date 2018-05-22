@@ -13,10 +13,10 @@
     "react-simplemde-editor": "^3.6.14"
   },
   "scripts": {
-    "start": "./node_modules/.bin/react-scripts-ts-antd start",
-    "build": "./node_modules/.bin/react-scripts-ts-antd build",
-    "test": "./node_modules/.bin/react-scripts-ts-antd test --env=jsdom",
-    "eject": "./node_modules/.bin/react-scripts-ts-antd eject"
+    "start": "node_modules/.bin/react-scripts-ts-antd start",
+    "build": "node_modules/.bin/react-scripts-ts-antd build",
+    "test": "node_modules/.bin/react-scripts-ts-antd test --env=jsdom",
+    "eject": "node_modules/.bin/react-scripts-ts-antd eject"
   },
   "devDependencies": {
     "@types/jest": "^22.2.3",
