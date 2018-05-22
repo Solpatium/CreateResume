@@ -10,7 +10,7 @@ var logger = require('morgan');
 
 var app = express();
 
-app.listen(process.env.APP_PORT, '0.0.0.0');
+app.listen(process.env.PORT, '0.0.0.0');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

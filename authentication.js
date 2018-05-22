@@ -45,7 +45,7 @@ function addAuthentication(app) {
         tokenURL: 'https://www.linkedin.com/oauth/v2/accessToken',
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: `${process.env.APP_URL}:${process.env.APP_PORT}/login/${provider}/callback`,
+        callbackURL: `${process.env.APP_URL}:${process.env.PORT}/login/${provider}/callback`,
         scope: ['r_basicprofile', 'r_emailaddress'],
         state: true,        
     },
@@ -58,10 +58,11 @@ function addAuthentication(app) {
 
     app.get(`/login/${provider}`, passport.authenticate(provider));
 
+    const redirectUrl = process.env.NODE_ENV == 'production' ? '/' : `${process.env.APP_URL}:${process.env.CLIENT_PORT}`;
     app.get(
         `/login/${provider}/callback`,
         passport.authenticate(provider, {
-            successRedirect: `${process.env.APP_URL}:${process.env.CLIENT_PORT}`,
+            successRedirect: redirectUrl,
             failureRedirect: `/login/${provider}`,
             failureFlash: true
         }));
