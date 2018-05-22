@@ -2,10 +2,12 @@
   "name": "example-create-react-app-express",
   "version": "1.0.0",
   "scripts": {
+    "start": "node app.js",
     "client": "cd client && yarn start",
     "server": "nodemon app.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "test": "node_modules/.bin/mocha test/*.js --exit"
+    "test": "node_modules/.bin/mocha test/*.js --exit",
+    "build": "cd client && yarn build"
   },
   "dependencies": {
     "@types/draft-js": "^0.10.23",

@@ -1,4 +1,12 @@
 language: node_js
 node_js:
-  - "node"
+- node
+script:
+- yarn build
 cache: yarn
+deploy:
+  provider: heroku
+  app: stark-thicket-65150
+  all_branches: true
+  api_key:
+    secure: gROu9yTP9uSgJiKB+jn+fwzxkHg6jIgZGj+cPvwTpIwp5zkznCgruijOTXxWCss2Ii7L42R/vM7uTKIBQ6zvcLM8OIievmTfbZTLC9xBsZBwvvf3qxcyBaF+Ng4y31mLIjfi0oHkB9ngklRUq52r71fnTybwU2KoDjxWVbOFHNyYJA5BlXgkr9XZMvDJQ6vEXtnHxKUWTI1tkkAkEj/1NTN119B4ZYe+6z+cSNHo22010fTjlRIWdUIVtIimd5uataLsRKhQ/IaLP/l8NVEf2JVlS5eHpAYDEdIoJmrwgH3mqPsKwqHnipFmH65ya/QM63kCvZnT+Veogs+rLvSChy/JQyTgU9wtvIfNSLB3oRLYG26eToPb6lt0f2ezK0S+toq8xidNPo1wgeeGi8xm9C5yTcLVZ2gVcLWO4MaoqacIJ2dvJBsB7Qvuk5m9VvTFCdeDaaUjSGjLN86HRjXSwWXLOWmtLm/YUAssH5/n5FcUwNY65SUK61JnrSMN6BUUi1fI1RbcCAPoNH17VwbXWlFVYmBo4UB6QUCU63lWcL2gNdhuX/wrnk0KUsx+j90U+6WxQQaUm3zHm/rb6uKF9Hsc6xAf/TBXKbtlB+d0PUyI84Rhfi5NLJpYEQhi3yBu20QTeCSevWb2QCZ4QfPzgdhTcoWKmzh1MbwIxU85b3A=

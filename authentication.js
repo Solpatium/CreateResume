@@ -2,7 +2,7 @@ const passport = require('passport');
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const logger = require('./logger');
 const User = require('./db').User
-const provider = 'linkedIn';
+const provider = 'linkedin';
 
 
 function addAuthentication(app) {
@@ -62,7 +62,8 @@ function addAuthentication(app) {
         `/login/${provider}/callback`,
         passport.authenticate(provider, {
             successRedirect: `${process.env.APP_URL}:${process.env.CLIENT_PORT}`,
-            failureRedirect: `/login/${provider}`
+            failureRedirect: `/login/${provider}`,
+            failureFlash: true
         }));
 }
 
