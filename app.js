@@ -10,8 +10,7 @@ var logger = require('morgan');
 
 var app = express();
 
-app.listen(process.env.APP_PORT, '0.0.0.0');
-
+app.listen(process.env.PORT, '0.0.0.0');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +21,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.SESSION_SECRET));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 addAuthentication(app);
 
@@ -31,10 +30,15 @@ app.get(`/user`, function (req, res) {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(req.user))
     } else {
+        req.session.destroy();
         res.status(403)
         res.send("Authentication failed")
     }
 });
+
+if (process.env.NODE_ENV === 'production') {
+    app.use('/', express.static('client/build'))
+}
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,5 +1,5 @@
 {
-  "name": "my-project",
+  "name": "create-resume-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,10 +13,10 @@
     "react-simplemde-editor": "^3.6.14"
   },
   "scripts": {
-    "start": "react-scripts-ts-antd start",
-    "build": "react-scripts-ts-antd build",
-    "test": "react-scripts-ts-antd test --env=jsdom",
-    "eject": "react-scripts-ts-antd eject"
+    "start": "../node_modules/.bin/react-scripts-ts-antd start",
+    "build": "../node_modules/.bin/react-scripts-ts-antd build",
+    "test": "../node_modules/.bin/react-scripts-ts-antd test --env=jsdom",
+    "eject": "../node_modules/.bin/react-scripts-ts-antd eject"
   },
   "devDependencies": {
     "@types/jest": "^22.2.3",

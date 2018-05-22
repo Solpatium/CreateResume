@@ -2,7 +2,7 @@ const passport = require('passport');
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const logger = require('./logger');
 const User = require('./db').User
-const provider = 'linkedIn';
+const provider = 'linkedin';
 
 
 function addAuthentication(app) {
@@ -40,12 +40,13 @@ function addAuthentication(app) {
         })
     });
 
+    const callbackURL = process.env.NODE_ENV == 'production' ? `${process.env.APP_URL}login/${provider}/callback` : `${process.env.APP_URL}:${process.env.PORT}/login/${provider}/callback`;
     const strategy = new LinkedInStrategy({
         authorizationURL: 'https://www.linkedin.com/oauth/v2/authorization',
         tokenURL: 'https://www.linkedin.com/oauth/v2/accessToken',
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: `${process.env.APP_URL}:${process.env.APP_PORT}/login/${provider}/callback`,
+        callbackURL: callbackURL,
         scope: ['r_basicprofile', 'r_emailaddress'],
         state: true,        
     },
@@ -58,11 +59,13 @@ function addAuthentication(app) {
 
     app.get(`/login/${provider}`, passport.authenticate(provider));
 
+    const redirectUrl = process.env.NODE_ENV == 'production' ? '/' : `${process.env.APP_URL}:${process.env.CLIENT_PORT}`;
     app.get(
         `/login/${provider}/callback`,
         passport.authenticate(provider, {
-            successRedirect: `${process.env.APP_URL}:${process.env.CLIENT_PORT}`,
-            failureRedirect: `/login/${provider}`
+            successRedirect: redirectUrl,
+            failureRedirect: `/login/${provider}`,
+            failureFlash: true
         }));
 }
 
