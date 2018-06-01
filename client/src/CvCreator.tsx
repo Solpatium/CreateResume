@@ -6,6 +6,7 @@ import FieldList from './fields/FieldList'
 import TextField from './fields/TextField'
 import TitleField from './fields/TitleField'
 import EducationField from './fields/EducationField'
+import WorkField from './fields/WorkField'
 import CV from './CV'
 // import {Field} from './fields/Field'
 
@@ -75,6 +76,7 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
                 <TitleField key={0} index={0} />
                 <TextField key={1} index={1} />
                 <EducationField key={2} index={2} />
+                <WorkField key={3} index={3} />
             </FieldList>
         </div>)
     }

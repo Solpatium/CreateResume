@@ -4,6 +4,7 @@ import TitleField from './TitleField'
 import TextField from './TextField'
 import EducationField from './EducationField'
 import * as React from 'react';
+import WorkField from "./WorkField";
 
 interface IFieldListState {
     fieldToAdd: string,
@@ -62,6 +63,7 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
                     <Select.Option value="title">Section title</Select.Option>
                     <Select.Option value="text">Custom text</Select.Option>
                     <Select.Option value="education">Education</Select.Option>
+                    <Select.Option value="work">Work</Select.Option>
             </Select>
             <Button  type="primary" onClick={this.addField}>Add a new field</Button>
             </Col></Row>
@@ -87,6 +89,9 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
             break;
             case 'education':
             field = <EducationField index={key}/>
+            break;
+            case 'work':
+            field = <WorkField index={key}/>
             break;
         }
         if( field ) {
