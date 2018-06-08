@@ -31,5 +31,8 @@ export default class TitleField extends Field<ITextFieldProps, ITextFieldState> 
         )
     }
 
-    public update = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({value: event.target.value})
+    public update = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({value: event.target.value});
+        this.notifyChange()
+    }
 }

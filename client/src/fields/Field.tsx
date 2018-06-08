@@ -1,9 +1,15 @@
 import { Draggable } from 'react-beautiful-dnd';
 import * as React from 'react';
 import { Card, Button } from 'antd';
+import EducationField from './EducationField';
+import TextField from './TextField';
+import TitleField from './TitleField';
+import WorkField from './WorkField';
+
 
 export interface IFieldProps {
     index: number,
+    onChange?: VoidFunction
 }
 
 export interface IFieldState {
@@ -49,6 +55,8 @@ export abstract class Field<Props extends IFieldProps, State extends IFieldState
             </Draggable>
         )
     }
+    
+    public notifyChange = () => this.props.onChange && this.props.onChange();
 
     private buttons = () => {
         const icon = this.state.hidden ? 'up' : 'down';
@@ -60,3 +68,5 @@ export abstract class Field<Props extends IFieldProps, State extends IFieldState
 
     private toggle = () => this.setState({ hidden: !this.state.hidden })
 }
+
+export type AnyField = EducationField | TextField | TitleField | WorkField;

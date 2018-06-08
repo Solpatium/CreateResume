@@ -2,17 +2,21 @@ import { Droppable, DragDropContext, DropResult } from 'react-beautiful-dnd';
 import {Row, Col, Button, Select} from 'antd';
 import TitleField from './TitleField'
 import TextField from './TextField'
+import {AnyField} from './Field'
 import EducationField from './EducationField'
 import * as React from 'react';
+import WorkField from "./WorkField";
 
 interface IFieldListState {
     fieldToAdd: string,
     fields: JSX.Element[]
 }
 interface IFieldListProps {
-    children: JSX.Element[]
+    children: JSX.Element[],
+    onUpdate: (fields: object[]) => void
 }
 export default class FieldList extends React.Component<IFieldListProps, IFieldListState> {
+    private fieldRefs : Array<React.RefObject<AnyField>> = [];
 
     public constructor(props: IFieldListProps) {
         super(props)
@@ -39,10 +43,13 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
         console.log(fields)
         console.log(result.source.index, result.destination.index)
         this.setState({ fields });
+        this.update();
     };
 
     public render() {
-        return (
+        this.fieldRefs = this.state.fields.map( _ => React.createRef());
+
+        const toReturn =  (
             <div>
             <DragDropContext
                 onDragStart={this.onDragStart}
@@ -52,7 +59,7 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
                 <Droppable droppableId="droppable-1" type="PERSON">
                     {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.droppableProps}>
-                            {this.state.fields.map((e, index) => React.cloneElement(e, { index }))}
+                            {this.state.fields.map((e, index) => React.cloneElement(e, { onChange: this.update,ref: this.fieldRefs[index], index }))}
                         </div>
                     )}
                 </Droppable>;
@@ -62,11 +69,20 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
                     <Select.Option value="title">Section title</Select.Option>
                     <Select.Option value="text">Custom text</Select.Option>
                     <Select.Option value="education">Education</Select.Option>
+                    <Select.Option value="work">Work</Select.Option>
             </Select>
             <Button  type="primary" onClick={this.addField}>Add a new field</Button>
             </Col></Row>
             </div>
         );
+
+        this.update();
+
+        return toReturn;
+    }
+
+    public shouldComponentUpdate(pref: any, next: any) {
+        return false;
     }
 
     public changeSelectedField = (value: string) => this.setState({fieldToAdd: value}) 
@@ -88,11 +104,18 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
             case 'education':
             field = <EducationField index={key}/>
             break;
+            case 'work':
+            field = <WorkField index={key}/>
+            break;
         }
         if( field ) {
             const fields = [...this.state.fields, field];
             this.setState({fields})
         }
+    }
+
+    public update = () => {
+        this.props.onUpdate(this.fieldRefs);
     }
 
     private reorder = (list: any[], startIndex: number, endIndex: number) => {

@@ -30,5 +30,8 @@ export default class TextField extends Field<ITextFieldProps, ITextFieldState> {
         </FormItem>)
     }
 
-    public update = (event: React.ChangeEvent<HTMLTextAreaElement>) => this.setState({value: event.target.value})
+    public update = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        this.setState({value: event.target.value})
+        this.notifyChange()
+    }
 }
