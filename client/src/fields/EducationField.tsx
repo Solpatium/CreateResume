@@ -51,28 +51,28 @@ export default class EducationField extends Field<IEducationFieldProps, IEducati
             <Row>
                 <Col span={8}>
                     <FormItem label="Select start date">
-                        <MonthPicker placeholder="Education start date"/>
+                        <MonthPicker onChange={this.notifyChange} placeholder="Education start date"/>
                     </FormItem>
                 </Col>
                 <Col span={8}>
                     <FormItem label="Select end date">
-                        <MonthPicker placeholder="Education end date"/>
+                        <MonthPicker onChange={this.notifyChange} placeholder="Education end date"/>
                     </FormItem>
                 </Col>
                 <Col span={8}>
                 <FormItem label="University location">
-                    <Input placeholder="Kraków"/>
+                    <Input onChange={this.notifyChange} placeholder="Kraków"/>
                 </FormItem>
                 </Col>
             </Row>
             <Row><Col span={24}>
             <FormItem label="University name">
-                <Input placeholder="AGH University of Science and Technology"/>
+                <Input onChange={this.notifyChange} placeholder="AGH University of Science and Technology"/>
             </FormItem>
             </Col></Row>
             <Row><Col span={24}>
             <FormItem label="Faculty">
-                <Input placeholder="Faculty of Computer Science, Electronics and Telecommunication, Computer Science"/>
+                <Input onChange={this.notifyChange} placeholder="Faculty of Computer Science, Electronics and Telecommunication, Computer Science"/>
             </FormItem>
             </Col></Row>
             </div>)

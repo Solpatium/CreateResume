@@ -8,32 +8,48 @@ import TitleField from './fields/TitleField'
 import EducationField from './fields/EducationField'
 import WorkField from './fields/WorkField'
 import CV from './CV'
+import {AnyField} from './fields/Field'; 
+// import { Field } from './fields/Field';
+// import { Field } from './fields/Field';
 // import {Field} from './fields/Field'
 
 interface ICvDataProps {
     user: any
 }
+// interface Field {
+//     type: string;
+//     value: object;
+// }
 interface ICvDataState {
-    data: Map<string, string>
+    data: Map<string, string>,
+    fields: Array<React.RefObject<AnyField>>
 }
 export default class CvCreator extends React.Component<ICvDataProps, ICvDataState> {
+
     constructor(props: any) {
         super(props)
         this.state = {
-            data: new Map()
+            data: new Map(),
+            fields: []
         };
-        console.log(props)
-    }
+    }  
 
     public render() {
+        const dataFields = this.renderFields();
+        console.log( (dataFields.props as any).children[0].state )
         return (<Row className="cv-inside">
-            <Col span={12}>{this.renderFields()}</Col>
-            <Col span={12} className="cv-inside"><CV user={this.props.user} data={this.state.data} fields={[]}/></Col>
+            <Col span={12}>{dataFields}</Col>
+            <Col span={12} className="cv-inside"><CV user={this.props.user} data={this.state.data} fields={this.state.fields}/></Col>
         </Row>)   
     }
 
 
     public onChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => this.set(name, event.target.value);
+
+    public onFieldsUpdate = (fields: Array<React.RefObject<AnyField>>) => {
+        this.setState({fields});
+        console.log(fields);
+    }
 
     public set = (name: string, value: string) => {
         const data = new Map(this.state.data);
@@ -72,7 +88,7 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
                 </Col>
             </Row>
             </div>
-            <FieldList>
+            <FieldList onUpdate={this.onFieldsUpdate}>
                 <TitleField key={0} index={0} />
                 <TextField key={1} index={1} />
                 <EducationField key={2} index={2} />

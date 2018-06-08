@@ -65,7 +65,7 @@ export default class WorkField extends Field<IWorkFieldProps, IWorkFieldState> {
                     <FormItem label="Select end date">
                         <MonthPicker placeholder="End date" disabled={this.state.currently}/>
                     </FormItem>
-                    <Switch onChange={this.onChange} />
+                    <Switch onChange={this.notifyChange} />
                     <label>Currently working</label>
                 </Col>
                 <Col span={8}>
@@ -100,6 +100,7 @@ export default class WorkField extends Field<IWorkFieldProps, IWorkFieldState> {
         this.setState({
             currently: !this.state.currently,
         });
+        this.notifyChange()
     }
 
     public update = (event: React.ChangeEvent<HTMLTextAreaElement>) => this.setState({description: event.target.value})
