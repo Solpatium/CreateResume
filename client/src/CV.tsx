@@ -51,7 +51,11 @@ export default class CV extends React.Component<ICvDataProps> {
             switch(f.constructor.name) {
                 case EducationField.name:
                     f = f as EducationField;
-                    return <p key={index}>{f.state.faculty}</p>
+                    return <Row>
+                            <p key={index}>{f.state.universityName}</p>
+                            <span className="faculty">{f.state.faculty}</span>
+                            <span className="location">{f.state.location}</span>
+                        </Row>
 
                 case TextField.name:
                     f = f as TextField;

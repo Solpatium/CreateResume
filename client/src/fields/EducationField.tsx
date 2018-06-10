@@ -52,7 +52,7 @@ export default class EducationField extends Field<IEducationFieldProps, IEducati
                 </Col>
                 <Col span={8}>
                 <FormItem label="University location">
-                    <Input onChange={this.update} placeholder="Kraków"/>
+                    <Input onChange={this.updateLocation} placeholder="Kraków"/>
                 </FormItem>
                 </Col>
             </Row>
