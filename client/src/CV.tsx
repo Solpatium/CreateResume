@@ -51,10 +51,30 @@ export default class CV extends React.Component<ICvDataProps> {
             switch(f.constructor.name) {
                 case EducationField.name:
                     f = f as EducationField;
+                    const startYear = f.state.startYear;
+                    let sY = ''
+                    if(startYear !== 0) {sY = String(startYear)};
+
+                    const endYear = f.state.endYear;
+                    let eY = ''
+                    if(endYear !== 0) {eY = String(endYear)};
+
+                    const startMonth = f.state.startMonth;
+                    let sM = ''
+                    if(startMonth !== 0) {sM = String(startMonth)};
+
+                    const endMonth = f.state.endMonth;
+                    let eM = ''
+                    if(endMonth !== 0) {eM = String(endMonth)};
+
                     return <Row>
                             <p key={index}>{f.state.universityName}</p>
                             <span className="faculty">{f.state.faculty}</span>
                             <span className="location">{f.state.location}</span>
+                            <span className="StartYear">{sY}</span>
+                            <span className="StartMonth">{sM}</span>
+                            <span className="EndYear">{eY}</span>
+                            <span className="EndMonth">{eM}</span>
                         </Row>
 
                 case TextField.name:
