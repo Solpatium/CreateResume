@@ -58,7 +58,7 @@ export default class EducationField extends Field<IEducationFieldProps, IEducati
             </Row>
             <Row><Col span={24}>
             <FormItem label="University name">
-                <Input onChange={this.update} placeholder="AGH University of Science and Technology"/>
+                <Input onChange={this.updateUniversity} placeholder="AGH University of Science and Technology"/>
             </FormItem>
             </Col></Row>
             <Row><Col span={24}>
@@ -76,6 +76,16 @@ export default class EducationField extends Field<IEducationFieldProps, IEducati
 
     public updateFaculty = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({faculty: event.target.value});
+        this.notifyChange()
+    }
+
+    public updateUniversity = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({universityName: event.target.value});
+        this.notifyChange()
+    }
+
+    public updateLocation= (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({location: event.target.value});
         this.notifyChange()
     }
 }
