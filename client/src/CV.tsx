@@ -30,6 +30,7 @@ export default class CV extends React.Component<ICvDataProps> {
                 {image ? <img src={image}/> : ''}
                 <span className="name">{this.get('name')}</span>
                 <span className="surname">{this.get('surname')}</span>
+                <span className="location">{this.get('location')}</span>
             </Row>
             {this.renderFields()}
             </div>
