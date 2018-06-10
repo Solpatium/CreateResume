@@ -25,7 +25,7 @@ interface IEducationFieldState extends IFieldState {
 export default class EducationField extends Field<IEducationFieldProps, IEducationFieldState> {
     constructor(props: IEducationFieldProps) {
         super(props)
-        const state: IEducationFieldState = {
+        this.state = {
             faculty: props.faculty ? props.faculty : '',
             hidden: false,
             id: `field-${Field.counter}`,
@@ -33,15 +33,6 @@ export default class EducationField extends Field<IEducationFieldProps, IEducati
             universityName: props.universityName ? props.universityName : '',
         }
 
-        if( props.from ) {
-            state.from = props.from;
-        }
-
-        if( props.to ) {
-            state.to = props.to;
-        }
-
-        this.state = state;
     }
 
     public get name() { return 'Education' };
@@ -51,32 +42,40 @@ export default class EducationField extends Field<IEducationFieldProps, IEducati
             <Row>
                 <Col span={8}>
                     <FormItem label="Select start date">
-                        <MonthPicker onChange={this.notifyChange} placeholder="Education start date"/>
+                        <MonthPicker onChange={this.update} placeholder="Education start date"/>
                     </FormItem>
                 </Col>
                 <Col span={8}>
                     <FormItem label="Select end date">
-                        <MonthPicker onChange={this.notifyChange} placeholder="Education end date"/>
+                        <MonthPicker onChange={this.update} placeholder="Education end date"/>
                     </FormItem>
                 </Col>
                 <Col span={8}>
                 <FormItem label="University location">
-                    <Input onChange={this.notifyChange} placeholder="Kraków"/>
+                    <Input onChange={this.update} placeholder="Kraków"/>
                 </FormItem>
                 </Col>
             </Row>
             <Row><Col span={24}>
             <FormItem label="University name">
-                <Input onChange={this.notifyChange} placeholder="AGH University of Science and Technology"/>
+                <Input onChange={this.update} placeholder="AGH University of Science and Technology"/>
             </FormItem>
             </Col></Row>
             <Row><Col span={24}>
             <FormItem label="Faculty">
-                <Input onChange={this.notifyChange} placeholder="Faculty of Computer Science, Electronics and Telecommunication, Computer Science"/>
+                <Input onChange={this.updateFaculty} placeholder="Faculty of Computer Science, Electronics and Telecommunication, Computer Science"/>
             </FormItem>
             </Col></Row>
             </div>)
     }
 
-    // public update = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({value: event.target.value})
+    public update = (event: any) => {
+        // this.setState({faculty: event.target.value});
+        this.notifyChange()
+    }
+
+    public updateFaculty = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({faculty: event.target.value});
+        this.notifyChange()
+    }
 }
