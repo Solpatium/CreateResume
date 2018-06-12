@@ -41,6 +41,14 @@ export default class CV extends React.Component<ICvDataProps> {
 
     public renderFields = () => {
         let index = 0;
+        let startYear = 0;
+        let endYear = 0;
+        let startMonth = 0;
+        let endMonth = 0;
+        let sY = '';
+        let eY = '';
+        let sM = '';
+        let eM = '';
         const fields = this.props.fields
         .map(ref => ref.current)
         .filter( f => f != null )
@@ -51,20 +59,16 @@ export default class CV extends React.Component<ICvDataProps> {
             switch(f.constructor.name) {
                 case EducationField.name:
                     f = f as EducationField;
-                    const startYear = f.state.startYear;
-                    let sY = ''
+                    startYear = f.state.startYear;
                     if(startYear !== 0) {sY = String(startYear)};
 
-                    const endYear = f.state.endYear;
-                    let eY = ''
+                    endYear = f.state.endYear;
                     if(endYear !== 0) {eY = String(endYear)};
 
-                    const startMonth = f.state.startMonth;
-                    let sM = ''
+                    startMonth = f.state.startMonth;
                     if(startMonth !== 0) {sM = String(startMonth)};
 
-                    const endMonth = f.state.endMonth;
-                    let eM = ''
+                    endMonth = f.state.endMonth;
                     if(endMonth !== 0) {eM = String(endMonth)};
 
                     return <Row>
@@ -87,7 +91,34 @@ export default class CV extends React.Component<ICvDataProps> {
 
                 case WorkField.name:
                     f = f as WorkField;
-                    return <p key={index}>{f.state.description}</p>
+                    startYear = f.state.startYear;
+                    if(startYear !== 0) {sY = String(startYear)};
+
+                    endYear = f.state.endYear;
+                    if(endYear !== 0) {eY = String(endYear)};
+
+                    startMonth = f.state.startMonth;
+                    if(startMonth !== 0) {sM = String(startMonth)};
+
+                    endMonth = f.state.endMonth;
+                    if(endMonth !== 0) {eM = String(endMonth)};
+
+                    let currently = ''
+                    if(f.state.currently === true){
+                        currently = "CurrentlyWorking"
+                    }
+
+                    return <Row>
+                        <p key={index}>{f.state.company}</p>
+                        <span className="position">{f.state.position}</span>
+                        <span className="description">{f.state.description}</span>
+                        <span className="location">{f.state.location}</span>
+                        <span className="currently">{currently}</span>
+                        <span className="StartYear">{sY}</span>
+                        <span className="StartMonth">{sM}</span>
+                        <span className="EndYear">{eY}</span>
+                        <span className="EndMonth">{eM}</span>
+                    </Row>
             }
             return <span key={index}/>
     });
