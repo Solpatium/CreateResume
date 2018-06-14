@@ -10,6 +10,7 @@ import WorkField from "./WorkField";
 interface IFieldListState {
     fieldToAdd: string,
     fields: JSX.Element[]
+    shouldRefresh: boolean
 }
 interface IFieldListProps {
     children: JSX.Element[],
@@ -20,11 +21,10 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
 
     public constructor(props: IFieldListProps) {
         super(props)
-        this.state = { fields: props.children, fieldToAdd: 'title' }
+        this.state = { fields: props.children, fieldToAdd: 'title', shouldRefresh: true }
     }
 
     public onDragStart = () => {
-        console.log('start')
         /*...*/
     };
     public onDragUpdate = () => {
@@ -42,7 +42,7 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
         );
         console.log(fields)
         console.log(result.source.index, result.destination.index)
-        this.setState({ fields });
+        this.setState({ fields, shouldRefresh: true });
         this.update();
     };
 
@@ -59,7 +59,7 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
                 <Droppable droppableId="droppable-1" type="PERSON">
                     {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.droppableProps}>
-                            {this.state.fields.map((e, index) => React.cloneElement(e, { onChange: this.update,ref: this.fieldRefs[index], index }))}
+                            {this.state.fields.map((e, index) => React.cloneElement(e, { onDelete: this.removeField(index), onChange: this.update,ref: this.fieldRefs[index], index }))}
                         </div>
                     )}
                 </Droppable>;
@@ -76,19 +76,33 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
             </div>
         );
 
-        this.update();
-
         return toReturn;
     }
 
-    public shouldComponentUpdate(pref: any, next: any) {
-        return false;
+    public componentDidMount() {
+        this.update()
     }
 
-    public changeSelectedField = (value: string) => this.setState({fieldToAdd: value}) 
+    // public 
 
-    public removeField = (index: number) => {
-        this.setState({fields: this.state.fields.splice(index, 1)})
+    public shouldComponentUpdate(pref: any, next: any) {
+        return next.shouldRefresh;
+    }
+
+    public componentDidUpdate() {
+        this.setState({shouldRefresh: false})
+    }
+
+    public changeSelectedField = (value: string) => {
+        console.log(value)
+        this.setState({fieldToAdd: value, shouldRefresh: true}) 
+    }
+    public removeField = (index: number) => () => {
+        console.log("REMOVING")
+        console.log(index)
+        const newFields = [...this.state.fields]
+        newFields.splice(index, 1)
+        this.setState({fields: newFields, shouldRefresh: true})
     }
 
     public addField = () => {
@@ -110,7 +124,7 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
         }
         if( field ) {
             const fields = [...this.state.fields, field];
-            this.setState({fields})
+            this.setState({fields, shouldRefresh: true})
         }
     }
 

@@ -39,7 +39,9 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
         console.log( (dataFields.props as any).children[0].state )
         return (<Row className="cv-inside">
             <Col span={12}>{dataFields}</Col>
-            <Col span={12} className="cv-inside"><CV user={this.props.user} data={this.state.data} fields={this.state.fields}/></Col>
+            <Col span={12} className="cv-inside">
+                <CV user={this.props.user} data={this.state.data} fields={this.state.fields}/>
+            </Col>
         </Row>)   
     }
 
