@@ -28,10 +28,6 @@ interface IWorkFieldState extends IFieldState {
     position: string,
     description: string,
     location: string,
-    startYear: number,
-    endYear: number,
-    startMonth: number,
-    endMonth: number,
     currently: boolean
 }
 
@@ -39,17 +35,15 @@ export default class WorkField extends Field<IWorkFieldProps, IWorkFieldState> {
     constructor(props: IWorkFieldProps) {
         super(props)
         this.state = {
-            startYear: props.startYear ? props.startYear : 0,
-            endYear: props.endYear ? props.endYear : 0,
-            startMonth: props.startMonth ? props.startMonth : 0,
-            endMonth: props.endMonth ? props.endMonth : 0,
+            from: props.startYear && props.startMonth ? moment({year: props.startYear, month: props.startMonth}) : undefined,
+            to: props.endYear && props.endMonth ? moment({year: props.endYear, month: props.endMonth}) : undefined,
             position: props.position ? props.position : '',
             description: props.description ? props.description : '',
             hidden: false,
             id: `field-${Field.counter}`,
             location: props.location ? props.location : '',
             company: props.company ? props.company : '',
-            currently: props.currently ? props.currently : false,
+            currently: props.currently || false
         }
     }
 // <Checkbox onChange={this.onChange}>Currrently working</Checkbox>
@@ -60,38 +54,38 @@ export default class WorkField extends Field<IWorkFieldProps, IWorkFieldState> {
             <Row>
                 <Col span={8}>
                     <FormItem label="Select start date">
-                        <MonthPicker placeholder="Start date" onChange={this.updateStartDate}/>
+                        <MonthPicker value={this.state.from} placeholder="Start date" onChange={this.updateStartDate}/>
                     </FormItem>
                 </Col>
                 <Col span={8}>
                     <FormItem label="Select end date">
-                        <MonthPicker placeholder="End date" onChange={this.updateEndDate} disabled={this.state.currently}/>
+                        <MonthPicker value={this.state.to} placeholder="End date" onChange={this.updateEndDate} disabled={this.state.currently}/>
                     </FormItem>
-                    <Switch onChange={this.updateCurrently} />
+                    <Switch checked={this.state.currently} onChange={this.updateCurrently} />
                     <label>Currently working</label>
                 </Col>
                 <Col span={8}>
                 <FormItem label="Location">
-                    <Input placeholder="Kraków" onChange={this.updateLocation} />
+                    <Input value={this.state.location} placeholder="Kraków" onChange={this.updateLocation} />
                 </FormItem>
                 </Col>
             </Row>
             <Row>
                 <Col span={12}>
                     <FormItem label="Company">
-                        <Input placeholder="Google" onChange={this.updateCompany} style={{ "width" : "90%"}}/>
+                        <Input value={this.state.company} placeholder="Google" onChange={this.updateCompany} style={{ "width" : "90%"}}/>
                     </FormItem>
                 </Col>
                 <Col span={12}>
                     <FormItem label="Position">
-                        <Input placeholder="Developer" onChange={this.updatePosition}/>
+                        <Input value={this.state.position} placeholder="Developer" onChange={this.updatePosition}/>
                     </FormItem>
                 </Col>
             </Row>
             <Row>
                 <Col span={48}>
                     <FormItem label="Job Description">
-                        <TextArea placeholder="I was doing pancakes" onChange={this.updateDescription} rows={5}/>
+                        <TextArea value={this.state.description} placeholder="I was doing pancakes" onChange={this.updateDescription} rows={5}/>
                     </FormItem>
                 </Col>
             </Row>
@@ -110,22 +104,12 @@ export default class WorkField extends Field<IWorkFieldProps, IWorkFieldState> {
         this.setState({description: event.target.value});
         this.notifyChange()
     }
-    public updateEndDate = (date: moment.Moment, dateString: string) => {
-        if( date !== null) {
-            this.setState({endYear: date.year(), endMonth: date.month() + 1});
-        }
-        else{
-            this.setState({endYear: 0, endMonth: 0});
-        }
+    public updateEndDate = (to: moment.Moment, dateString: string) => {
+        this.setState({to})
         this.notifyChange()
     }
-    public updateStartDate = (date: moment.Moment, dateString: string) => {
-        if( date !== null) {
-            this.setState({startYear: date.year(), startMonth: date.month() + 1});
-        }
-        else{
-            this.setState({startYear: 0, startMonth: 0});
-        }
+    public updateStartDate = (from: moment.Moment, dateString: string) => {
+        this.setState({from})
         this.notifyChange()
     }
     public updateCurrently= (event: any) => {

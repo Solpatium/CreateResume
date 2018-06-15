@@ -41,14 +41,6 @@ export default class CV extends React.Component<ICvDataProps> {
 
     public renderFields = () => {
         let index = 0;
-        let startYear = 0;
-        let endYear = 0;
-        let startMonth = 0;
-        let endMonth = 0;
-        let sY = '';
-        let eY = '';
-        let sM = '';
-        let eM = '';
         const fields = this.props.fields
         .map(ref => ref.current)
         .filter( f => f != null )
@@ -59,26 +51,19 @@ export default class CV extends React.Component<ICvDataProps> {
             switch(f.constructor.name) {
                 case EducationField.name:
                     f = f as EducationField;
-                    startYear = f.state.startYear;
-                    if(startYear !== 0) {sY = String(startYear)};
-
-                    endYear = f.state.endYear;
-                    if(endYear !== 0) {eY = String(endYear)};
-
-                    startMonth = f.state.startMonth;
-                    if(startMonth !== 0) {sM = String(startMonth)};
-
-                    endMonth = f.state.endMonth;
-                    if(endMonth !== 0) {eM = String(endMonth)};
 
                     return <Row>
                             <p key={index}>{f.state.universityName}</p>
                             <span className="faculty">{f.state.faculty}</span>
                             <span className="location">{f.state.location}</span>
-                            <span className="StartYear">{sY}</span>
-                            <span className="StartMonth">{sM}</span>
-                            <span className="EndYear">{eY}</span>
-                            <span className="EndMonth">{eM}</span>
+                            {f.state.from ? 
+                                <span className="startDate">{f.state.from.format("YYYY-MM")}</span>
+                                : ''
+                            }
+                            {f.state.to ? 
+                                <span className="startDate">{f.state.to.format("YYYY-MM")}</span>
+                                : ''
+                            }
                         </Row>
 
                 case TextField.name:
@@ -91,21 +76,13 @@ export default class CV extends React.Component<ICvDataProps> {
 
                 case WorkField.name:
                     f = f as WorkField;
-                    startYear = f.state.startYear;
-                    if(startYear !== 0) {sY = String(startYear)};
 
-                    endYear = f.state.endYear;
-                    if(endYear !== 0) {eY = String(endYear)};
-
-                    startMonth = f.state.startMonth;
-                    if(startMonth !== 0) {sM = String(startMonth)};
-
-                    endMonth = f.state.endMonth;
-                    if(endMonth !== 0) {eM = String(endMonth)};
-
-                    let currently = ''
+                    let endDate = ''
                     if(f.state.currently === true){
-                        currently = "CurrentlyWorking"
+                        endDate = "currently"
+                    } else
+                    if( f.state.to ) {
+                        endDate = f.state.to.format("YYYY-MM")
                     }
 
                     return <Row>
@@ -113,11 +90,14 @@ export default class CV extends React.Component<ICvDataProps> {
                         <span className="position">{f.state.position}</span>
                         <span className="description">{f.state.description}</span>
                         <span className="location">{f.state.location}</span>
-                        <span className="currently">{currently}</span>
-                        <span className="StartYear">{sY}</span>
-                        <span className="StartMonth">{sM}</span>
-                        <span className="EndYear">{eY}</span>
-                        <span className="EndMonth">{eM}</span>
+                        {f.state.from ? 
+                                <span className="startDate">{f.state.from.format("YYYY-MM")}</span>
+                                : ''
+                            }
+                        {endDate ? 
+                            <span className="startDate">{endDate}</span>
+                            : ''
+                        }
                     </Row>
             }
             return <span key={index}/>

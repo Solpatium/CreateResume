@@ -9,9 +9,11 @@ import EducationField from './fields/EducationField'
 import WorkField from './fields/WorkField'
 import CV from './CV'
 import {AnyField} from './fields/Field'; 
+import clause from './clause';
 // import { Field } from './fields/Field';
 // import { Field } from './fields/Field';
 // import {Field} from './fields/Field'
+
 
 interface ICvDataProps {
     user: any
@@ -25,7 +27,6 @@ interface ICvDataState {
     fields: Array<React.RefObject<AnyField>>
 }
 export default class CvCreator extends React.Component<ICvDataProps, ICvDataState> {
-
     constructor(props: any) {
         super(props)
         this.state = {
@@ -90,13 +91,75 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
                 </Col>
             </Row>
             </div>
-            <FieldList onUpdate={this.onFieldsUpdate}>
-                <TitleField key={0} index={0} />
-                <TextField key={1} index={1} />
-                <EducationField key={2} index={2} />
-                <WorkField key={3} index={3} />
-            </FieldList>
+            {this.dynamicFields()}
         </div>)
+    }
+
+    private dynamicFields = () => {
+        let key=0;
+
+        const fields = [
+            <TitleField value="Education" key={key} index={key++} />,
+            <EducationField key={key} index={key++}
+                startYear={2015}
+                faculty={`Faculty of Computer Science, Electronics and Telecommunication, Computer Science`}
+                universityName={"AGH University of Science and Technology"}
+                location={"Kraków"}
+            />,
+            <EducationField key={key} index={key++}
+                startYear={2012}
+                endYear={2015}
+                universityName={"I Liceum Ogólnokształcące im. Kazimierza Brodzińskiego"}
+                location={"Tarnów"}
+            />,
+            <TitleField value="Experience" key={key} index={key++} />,
+        ]
+
+        if( this.props.user.positions && this.props.user.positions.length ) {
+            for(const position of this.props.user.positions) {
+                const props = {
+                    company: position.company,
+                    currently: position.isCurrent,
+                    startYear: position.startDateYear,
+                    startMonth: position.startDateMonth ? position.startDateMonth-1 : 0,
+                    endYear: position.endDateYear,
+                    endMonth: position.endDateMonth
+                }
+                fields.push(<WorkField 
+                    key={key} 
+                    index={key++} 
+                    {...props}
+                />)
+            }
+        } else {
+            fields.push(<WorkField 
+                key={key} 
+                index={key++} 
+                company={"Januszex"}
+                position={"Main ninja majster"}
+                description={"My responsibilites included:\n Laying on the floor"}
+                location={"Sosnowiec"}
+                startYear={2017}
+                startMonth={10}
+                currently={true}
+            />)
+            fields.push(<WorkField 
+                key={key} index={key++}
+                company={"Januszex"}
+                position={"Main ninja majster"}
+                description={"My responsibilites included:\n Laying on the floor"}
+                location={"Sosnowiec"}
+                startYear={2015}
+                startMonth={2}
+                endYear={2017}
+                endMonth={9}
+            />)
+        }
+        
+        fields.push(<TextField value={clause} key={key} index={key++} />)
+
+        return <FieldList onUpdate={this.onFieldsUpdate}>{fields}</FieldList>
+        
     }
 
 }
