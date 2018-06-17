@@ -5,6 +5,7 @@ import EducationField from './EducationField';
 import TextField from './TextField';
 import TitleField from './TitleField';
 import WorkField from './WorkField';
+import SkillField from './SkillField';
 
 
 export interface IFieldProps {
@@ -72,4 +73,4 @@ export abstract class Field<Props extends IFieldProps, State extends IFieldState
     private toggle = () => this.setState({ hidden: !this.state.hidden })
 }
 
-export type AnyField = EducationField | TextField | TitleField | WorkField;
+export type AnyField = EducationField | TextField | TitleField | WorkField | SkillField;

@@ -7,6 +7,7 @@ import TextField from './fields/TextField'
 import TitleField from './fields/TitleField'
 import EducationField from './fields/EducationField'
 import WorkField from './fields/WorkField'
+import SkillField from './fields/SkillField'
 import CV from './CV'
 import {AnyField} from './fields/Field'; 
 import clause from './clause';
@@ -39,7 +40,7 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
         const dataFields = this.renderFields();
         console.log( (dataFields.props as any).children[0].state )
         return (<Row className="cv-inside">
-            <Col span={12}>{dataFields}</Col>
+            <Col className="hide-print" span={12}>{dataFields}</Col>
             <Col span={12} className="cv-inside">
                 <CV user={this.props.user} data={this.state.data} fields={this.state.fields}/>
             </Col>
@@ -64,14 +65,17 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
 
     private renderFields = () => {
         const profileImage = this.get('picture') || require('./dummy-image.png');
-        return (<div><div className="cv-data">
-            <Row gutter={20}>
+        return (<div className="hide-print"><div className="cv-data">
+            <Row className="hide-print" gutter={20}>
                 <Col span={16}>
                     <FormItem label="Name">
                         <Input placeholder="Jon" value={this.get('name')} onChange={this.onChange('name')}/>
                     </FormItem>
                     <FormItem label="Surname">
                         <Input placeholder="Smith" value={this.get('surname')} onChange={this.onChange('surname')}/>
+                    </FormItem>
+                    <FormItem label="Occupation">
+                        <Input placeholder="Programmer" value={this.get('occupation')} onChange={this.onChange('occupation')}/>
                     </FormItem>
                     <FormItem label="Location">
                         <Input placeholder="Kraków, Poland" value={this.get('location')} onChange={this.onChange('location')}/>
@@ -155,8 +159,20 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
                 endMonth={9}
             />)
         }
-        
-        fields.push(<TextField value={clause} key={key} index={key++} />)
+                
+        const add = [
+            <TitleField key={key} index={key++} value="Skills"/>,
+            <SkillField key={key} index={key++} name="English" rating={4}/>,
+            <SkillField key={key} index={key++} name="HTML5" rating={5}/>,
+            <SkillField key={key} index={key++} name="CSS3" rating={5}/>,
+            <SkillField key={key} index={key++} name="JavaScript" rating={4}/>,
+            <SkillField key={key} index={key++} name="PHP" rating={4}/>,
+            <SkillField key={key} index={key++} name="Python3" rating={4}/>,
+            <SkillField key={key} index={key++} name="Java" rating={3}/>,
+            <SkillField key={key} index={key++} name="SQL" rating={3}/>,
+            <TextField value={clause} key={key} index={key++} />
+        ]
+        add.forEach(f => fields.push(f));
 
         return <FieldList onUpdate={this.onFieldsUpdate}>{fields}</FieldList>
         

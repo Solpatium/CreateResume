@@ -3,6 +3,7 @@ import {Row, Col, Button, Select} from 'antd';
 import TitleField from './TitleField'
 import TextField from './TextField'
 import {AnyField} from './Field'
+import SkillField from './SkillField'
 import EducationField from './EducationField'
 import * as React from 'react';
 import WorkField from "./WorkField";
@@ -70,6 +71,7 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
                     <Select.Option value="text">Custom text</Select.Option>
                     <Select.Option value="education">Education</Select.Option>
                     <Select.Option value="work">Work</Select.Option>
+                    <Select.Option value="skill">Skill</Select.Option>
             </Select>
             <Button  type="primary" onClick={this.addField}>Add a new field</Button>
             </Col></Row>
@@ -120,6 +122,8 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
             break;
             case 'work':
             field = <WorkField index={key}/>
+            case 'skill':
+            field = <SkillField index={key}/>
             break;
         }
         if( field ) {
