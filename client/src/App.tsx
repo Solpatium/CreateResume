@@ -12,7 +12,16 @@ class App extends React.Component<object, IAppState> {
 
   constructor(props: any) {
     super(props)
-    this.state = {}
+    
+    const url = window.location.href;
+    if( url.includes('no-login') ) {
+      this.state = {
+        user: {}
+      };
+      return;
+    } 
+
+    this.state = {};
 
     fetch('/user', {credentials: 'include'})
     .then(r => {

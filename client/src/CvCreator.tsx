@@ -69,22 +69,22 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
             <Row className="hide-print" gutter={20}>
                 <Col span={16}>
                     <FormItem label="Name">
-                        <Input placeholder="Jon" value={this.get('name')} onChange={this.onChange('name')}/>
+                        <Input name="name" placeholder="Jon" value={this.get('name')} onChange={this.onChange('name')}/>
                     </FormItem>
                     <FormItem label="Surname">
-                        <Input placeholder="Smith" value={this.get('surname')} onChange={this.onChange('surname')}/>
+                        <Input name="surname" placeholder="Smith" value={this.get('surname')} onChange={this.onChange('surname')}/>
                     </FormItem>
                     <FormItem label="Occupation">
-                        <Input placeholder="Programmer" value={this.get('occupation')} onChange={this.onChange('occupation')}/>
+                        <Input name="occupation" placeholder="Programmer" value={this.get('occupation')} onChange={this.onChange('occupation')}/>
                     </FormItem>
                     <FormItem label="Location">
-                        <Input placeholder="Kraków, Poland" value={this.get('location')} onChange={this.onChange('location')}/>
+                        <Input name="location" placeholder="Kraków, Poland" value={this.get('location')} onChange={this.onChange('location')}/>
                     </FormItem>
                     <FormItem label="Telephone">
-                        <Input placeholder="+48 123 234 567" value={this.get('telephone')} onChange={this.onChange('telephone')}/>
+                        <Input name="telephone" placeholder="+48 123 234 567" value={this.get('telephone')} onChange={this.onChange('telephone')}/>
                     </FormItem>
                     <FormItem label="Email">
-                        <Input type="email" placeholder="me@domain.com" value={this.get('email')} onChange={this.onChange('email')}/>
+                        <Input name="email" type="email" placeholder="me@domain.com" value={this.get('email')} onChange={this.onChange('email')}/>
                     </FormItem>
                 </Col>
                 <Col span={8}>

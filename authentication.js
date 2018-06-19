@@ -36,7 +36,7 @@ function addAuthentication(app) {
       
     passport.deserializeUser(function(id, done) {
         User.findOne({id: id}, function(error, result) {
-            done(error, result);
+            done(error, {} /*result*/);
         })
     });
 
