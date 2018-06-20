@@ -16,7 +16,8 @@ describe('Fields changing PDF content', function () {
 
     it('should display basic info changes in pdf', async () => {
         let browser = await puppeteer.launch({
-            headless: true
+            headless: true,
+            args: ['--no-sandbox']
         });
         let page = await browser.newPage();
 
@@ -48,7 +49,8 @@ describe('Fields changing PDF content', function () {
 
     it('should remove dynamic fields', async () => {
         let browser = await puppeteer.launch({
-            headless: true
+            headless: true,
+            args: ['--no-sandbox']
         });
         let page = await browser.newPage();
 
@@ -83,7 +85,8 @@ describe('Fields changing PDF content', function () {
 
     it('should display image', async () => {
         let browser = await puppeteer.launch({
-            headless: true
+            headless: true,
+            args: ['--no-sandbox']
         });
         let page = await browser.newPage();
 
