@@ -4,6 +4,11 @@ node_js:
 script:
 - yarn build
 cache: yarn
+sudo: false  
+addons:
+  chrome: stable
+before_install:
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 deploy:
   skip_cleanup: true
   provider: heroku
