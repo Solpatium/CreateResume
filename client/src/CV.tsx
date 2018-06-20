@@ -52,10 +52,7 @@ export default class CV extends React.Component<ICvDataProps> {
             index++;
             f = f as AnyField;
 
-            switch(f.constructor.name) {
-                case EducationField.name:
-                    f = f as EducationField;
-
+                if( f instanceof EducationField) {
                     return <Row key={index} className="education-field">
                             <span className="univeristy" key={index}>{f.state.universityName}</span>
                             <span className="faculty">{f.state.faculty}</span>
@@ -69,18 +66,17 @@ export default class CV extends React.Component<ICvDataProps> {
                             }
                             <span className="location">{f.state.location}</span>
                         </Row>
+                }
 
-                case TextField.name:
-                    f = f as TextField;
+                if( f instanceof TextField) {
                     return <p className="text-field" key={index}>{this.renderTextField(f.state.value)}</p>
+                }
 
-                case TitleField.name:
-                    f = f as TitleField;
+                if( f instanceof TitleField ) {
                     return <Row key={index} className="title-field"><h2 className="title-text" key={index}>{f.state.value}</h2></Row>
+                }
 
-                case WorkField.name:
-                    f = f as WorkField;
-
+                if( f instanceof WorkField ) {
                     let endDate = ''
                     if(f.state.currently === true){
                         endDate = "Present";
@@ -103,15 +99,15 @@ export default class CV extends React.Component<ICvDataProps> {
                         }
                         <span className="location">{f.state.location}</span>
                     </Row>
-                case SkillField.name:
-                    f = f as SkillField;
+                }
 
+                if( f instanceof SkillField ){
                     return (<span key={index} className="skill-field">
                         <span className="name">{f.state.name}</span>
                         <Rate character={<span className="rating-star" />} disabled={true} value={f.state.rating} />
                     </span>)
-                
-            }
+                }
+
             return <span key={index}/>
     });
 
