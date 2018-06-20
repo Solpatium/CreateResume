@@ -35,14 +35,11 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
         if (!result.destination) {
             return;
         }
-        console.log(this.state.fields)
         const fields = this.reorder(
             this.state.fields,
             result.source.index,
             result.destination.index
         );
-        console.log(fields)
-        console.log(result.source.index, result.destination.index)
         this.setState({ fields, shouldRefresh: true });
     };
 
@@ -96,12 +93,9 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
     }
 
     public changeSelectedField = (value: string) => {
-        console.log(value)
         this.setState({fieldToAdd: value, shouldRefresh: true}) 
     }
     public removeField = (index: number) => () => {
-        console.log("REMOVING")
-        console.log(index)
         const newFields = [...this.state.fields]
         newFields.splice(index, 1)
         this.setState({fields: newFields, shouldRefresh: true})

@@ -56,7 +56,7 @@ export default class CV extends React.Component<ICvDataProps> {
                 case EducationField.name:
                     f = f as EducationField;
 
-                    return <Row className="education-field">
+                    return <Row key={index} className="education-field">
                             <span className="univeristy" key={index}>{f.state.universityName}</span>
                             <span className="faculty">{f.state.faculty}</span>
                             {f.state.from ? 
@@ -76,7 +76,7 @@ export default class CV extends React.Component<ICvDataProps> {
 
                 case TitleField.name:
                     f = f as TitleField;
-                    return <Row className="title-field"><h2 className="title-text" key={index}>{f.state.value}</h2></Row>
+                    return <Row key={index} className="title-field"><h2 className="title-text" key={index}>{f.state.value}</h2></Row>
 
                 case WorkField.name:
                     f = f as WorkField;
@@ -89,7 +89,7 @@ export default class CV extends React.Component<ICvDataProps> {
                         endDate = f.state.to.format("YYYY.MM")
                     }
 
-                    return <Row className="work-field">
+                    return <Row key={index} className="work-field">
                         <span className="position">{f.state.position}</span>
                         <span className="company" key={index}>{f.state.company}</span>
                         <span className="description">{this.renderTextField(f.state.description)}</span>
@@ -106,9 +106,9 @@ export default class CV extends React.Component<ICvDataProps> {
                 case SkillField.name:
                     f = f as SkillField;
 
-                    return (<span className="skill-field">
+                    return (<span key={index} className="skill-field">
                         <span className="name">{f.state.name}</span>
-                        <Rate character={<span className="rating-star" />} disabled={true} defaultValue={f.state.rating} />
+                        <Rate character={<span className="rating-star" />} disabled={true} value={f.state.rating} />
                     </span>)
                 
             }

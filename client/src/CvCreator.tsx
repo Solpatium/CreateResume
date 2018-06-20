@@ -38,7 +38,6 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
 
     public render() {
         const dataFields = this.renderFields();
-        console.log( (dataFields.props as any).children[0].state )
         return (<Row className="cv-inside">
             <Col className="hide-print" span={12}>{dataFields}</Col>
             <Col span={12} className="cv-inside">
@@ -52,7 +51,6 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
 
     public onFieldsUpdate = (fields: Array<React.RefObject<AnyField>>) => {
         this.setState({fields});
-        console.log(fields);
     }
 
     public set = (name: string, value: string) => {
@@ -90,7 +88,7 @@ export default class CvCreator extends React.Component<ICvDataProps, ICvDataStat
                 <Col span={8}>
                     <FormItem label="Image">
                         <img className="photo-preview" src={profileImage} />
-                        <Input type="url" placeholder="your_image_url.com" value={this.get('picture')} onChange={this.onChange('picture')}/>
+                        <Input name="picture" type="url" placeholder="your_image_url.com" value={this.get('picture')} onChange={this.onChange('picture')}/>
                     </FormItem>
                 </Col>
             </Row>
