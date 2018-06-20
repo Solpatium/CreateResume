@@ -44,7 +44,6 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
         console.log(fields)
         console.log(result.source.index, result.destination.index)
         this.setState({ fields, shouldRefresh: true });
-        this.update();
     };
 
     public render() {
@@ -93,6 +92,7 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
 
     public componentDidUpdate() {
         this.setState({shouldRefresh: false})
+        this.update();
     }
 
     public changeSelectedField = (value: string) => {
@@ -105,6 +105,7 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
         const newFields = [...this.state.fields]
         newFields.splice(index, 1)
         this.setState({fields: newFields, shouldRefresh: true})
+        this.update();
     }
 
     public addField = () => {
