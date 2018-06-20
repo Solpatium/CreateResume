@@ -3,6 +3,7 @@ import {Row, Col, Button, Select} from 'antd';
 import TitleField from './TitleField'
 import TextField from './TextField'
 import {AnyField} from './Field'
+import SkillField from './SkillField'
 import EducationField from './EducationField'
 import * as React from 'react';
 import WorkField from "./WorkField";
@@ -10,6 +11,7 @@ import WorkField from "./WorkField";
 interface IFieldListState {
     fieldToAdd: string,
     fields: JSX.Element[]
+    shouldRefresh: boolean
 }
 interface IFieldListProps {
     children: JSX.Element[],
@@ -20,11 +22,10 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
 
     public constructor(props: IFieldListProps) {
         super(props)
-        this.state = { fields: props.children, fieldToAdd: 'title' }
+        this.state = { fields: props.children, fieldToAdd: 'title', shouldRefresh: true }
     }
 
     public onDragStart = () => {
-        console.log('start')
         /*...*/
     };
     public onDragUpdate = () => {
@@ -34,16 +35,12 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
         if (!result.destination) {
             return;
         }
-        console.log(this.state.fields)
         const fields = this.reorder(
             this.state.fields,
             result.source.index,
             result.destination.index
         );
-        console.log(fields)
-        console.log(result.source.index, result.destination.index)
-        this.setState({ fields });
-        this.update();
+        this.setState({ fields, shouldRefresh: true });
     };
 
     public render() {
@@ -59,7 +56,7 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
                 <Droppable droppableId="droppable-1" type="PERSON">
                     {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.droppableProps}>
-                            {this.state.fields.map((e, index) => React.cloneElement(e, { onChange: this.update,ref: this.fieldRefs[index], index }))}
+                            {this.state.fields.map((e, index) => React.cloneElement(e, { onDelete: this.removeField(index), onChange: this.update,ref: this.fieldRefs[index], index }))}
                         </div>
                     )}
                 </Droppable>;
@@ -70,25 +67,39 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
                     <Select.Option value="text">Custom text</Select.Option>
                     <Select.Option value="education">Education</Select.Option>
                     <Select.Option value="work">Work</Select.Option>
+                    <Select.Option value="skill">Skill</Select.Option>
             </Select>
             <Button  type="primary" onClick={this.addField}>Add a new field</Button>
             </Col></Row>
             </div>
         );
 
-        this.update();
-
         return toReturn;
     }
 
-    public shouldComponentUpdate(pref: any, next: any) {
-        return false;
+    public componentDidMount() {
+        this.update()
     }
 
-    public changeSelectedField = (value: string) => this.setState({fieldToAdd: value}) 
+    // public 
 
-    public removeField = (index: number) => {
-        this.setState({fields: this.state.fields.splice(index, 1)})
+    public shouldComponentUpdate(pref: any, next: any) {
+        return next.shouldRefresh;
+    }
+
+    public componentDidUpdate() {
+        this.setState({shouldRefresh: false})
+        this.update();
+    }
+
+    public changeSelectedField = (value: string) => {
+        this.setState({fieldToAdd: value, shouldRefresh: true}) 
+    }
+    public removeField = (index: number) => () => {
+        const newFields = [...this.state.fields]
+        newFields.splice(index, 1)
+        this.setState({fields: newFields, shouldRefresh: true})
+        this.update();
     }
 
     public addField = () => {
@@ -106,11 +117,13 @@ export default class FieldList extends React.Component<IFieldListProps, IFieldLi
             break;
             case 'work':
             field = <WorkField index={key}/>
+            case 'skill':
+            field = <SkillField index={key}/>
             break;
         }
         if( field ) {
             const fields = [...this.state.fields, field];
-            this.setState({fields})
+            this.setState({fields, shouldRefresh: true})
         }
     }
 

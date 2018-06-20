@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Song+Myung&subset=latin-ext');
+
 .App {
   text-align: center;
 
@@ -60,9 +62,157 @@
   background: white;
   // 595 x 842
   // 794 x 1123
-  width: 794px;
-  height: 1122px;
+  height: 297mm;
+  width: 210mm;
   margin: 10px;
+  font-size: 1.3em;
+  font-family: 'Lato', sans-serif;
+
+  $primary-color: #1890ff;
+  $dark-color: #2f2e2e;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Song Myung', serif;
+    color: $dark-color;
+  }
+
+  .basic-info {
+    display: flex;
+
+    img {
+      float: left;
+      margin-right: 20px;
+    }
+
+    .full-name {
+      flex: 1;
+      display: block;
+      margin-top: -10px;
+      font-style: normal;
+      
+      .name, .surname {
+        color: $primary-color;
+        font-size: 1.7em;
+        font-family: 'Song Myung', serif;
+      }
+      .surname {
+        margin-left: 6px;
+      }
+      .occupation {
+        font-size: 1.2em;
+        color: #636363;
+      }
+    }
+
+    .rest {
+      display: block;
+      font-style: italic;
+      color: #636363;
+    }
+
+    .anticon {
+      margin-right: 5px;
+    }
+  }
+
+  .title-field {
+    margin: 30px 0 20px;
+    overflow: hidden;
+
+    .title-text {
+      background: white;
+      padding-right: 20px;
+      display: inline-block;
+      margin: 0;
+      position: relative;
+      color: $dark-color;
+
+      &:after {
+        content: "";
+        display: inline-block;
+        height: 1px;
+        width: 1000px;
+        border-bottom: solid 1px black;
+        position: absolute;
+        left: 100%;
+        top: 50%;
+      }
+    }
+  }
+
+  .education-field {
+    margin: 15px 0;
+    .univeristy,
+    .faculty {
+      display: block;
+      font-weight: 800;
+      color: $dark-color;
+    }
+    .faculty {
+      margin-bottom: 5px;
+    }
+  }
+
+  .work-field {
+    margin: 15px 0;
+    .position,
+    .company {
+      font-weight: 800;
+      display: inline-block;
+      margin-bottom: 5px;
+      color: $dark-color;
+    }
+    .position:not(:empty) + .company:not(:empty)::before {
+      content: ", ";
+    }
+    .description {
+      display: block;
+      color: #3c3b3b;
+    }
+  }
+
+  .text-field {
+    margin-top: 30px;
+  }
+
+  .skill-field {
+    display: inline-block;
+    margin: 10px;
+    
+    .name {
+      display: block;
+    }
+    .rating-star {
+      display: inline-block;
+      color: #1890ff;
+      &:before {
+        content: "■";
+      }
+    }
+    
+    .ant-rate-star-zero .rating-star {
+        color: #e8e8e8;
+    }
+  }
+
+  .start-date,
+  .end-date,
+  .location {
+    font-style: italic;
+    font-size: 0.95em;
+    display: inline-block;
+    margin-top: 5px;
+    color: #636363;
+  }
+
+  .start-date + .end-date:not(:empty):before {
+    content: " - "
+  }
+
+  .start-date + .location:not(:empty):before,
+  .end-date + .location:not(:empty):before {
+    content: ", "
+  }
 }
 
 .cv-basic {
@@ -70,8 +220,12 @@
 }
 
 @media print { 
+  @page {
+    margin: 0;
+  }
+
   body {
-  .ant-col-12, .ant-row { display: none; }
+  .hide-print { display: none; }
   
   body, #root, .cv-inside {
     display: block;
@@ -89,11 +243,12 @@
 
   .cv-document {
     display: block;
+    width: 100%;
     margin: 0;
   }
 
-  .cv-document * {
+  /*.cv-document * {
     display: initial;
-  }
+  }*/
 }
 }

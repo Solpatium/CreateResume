@@ -5,17 +5,19 @@
   "dependencies": {
     "@types/draft-js": "^0.10.23",
     "@types/react-beautiful-dnd": "^6.0.1",
+    "@types/react-test-renderer": "^16.0.1",
     "antd": "^3.5.2",
     "draft-js": "^0.10.5",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-scripts-ts-antd": "2.15.1",
-    "react-simplemde-editor": "^3.6.14"
+    "react-simplemde-editor": "^3.6.14",
+    "react-test-renderer": "^16.4.1"
   },
   "scripts": {
     "start": "../node_modules/.bin/react-scripts-ts-antd start",
     "build": "../node_modules/.bin/react-scripts-ts-antd build",
-    "test": "../node_modules/.bin/react-scripts-ts-antd test --env=jsdom",
+    "test": "CI=true ../node_modules/.bin/react-scripts-ts-antd test --silent --env=jsdom",
     "eject": "../node_modules/.bin/react-scripts-ts-antd eject"
   },
   "devDependencies": {

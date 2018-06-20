@@ -8,11 +8,20 @@ interface IAppState {
   user?: object 
 }
 class App extends React.Component<object, IAppState> {
-  private static AUTHENTICATE_URL = 'http://localhost:5000/login/linkedin';
+  private static AUTHENTICATE_URL = '/login/linkedin';
 
   constructor(props: any) {
     super(props)
-    this.state = {}
+    
+    const url = window.location.href;
+    if( url.includes('no-login') ) {
+      this.state = {
+        user: {}
+      };
+      return;
+    } 
+
+    this.state = {};
 
     fetch('/user', {credentials: 'include'})
     .then(r => {

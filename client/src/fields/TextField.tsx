@@ -26,7 +26,7 @@ export default class TextField extends Field<ITextFieldProps, ITextFieldState> {
 
     public get content(): React.ReactNode {
         return (<FormItem label="Content">
-            <TextArea placeholder="I like pancakes" onChange={this.update} rows={5}/>
+            <TextArea value={this.state.value} placeholder="I like pancakes" onChange={this.update} rows={5}/>
         </FormItem>)
     }
 

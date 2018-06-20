@@ -5,11 +5,13 @@ import EducationField from './EducationField';
 import TextField from './TextField';
 import TitleField from './TitleField';
 import WorkField from './WorkField';
+import SkillField from './SkillField';
 
 
 export interface IFieldProps {
     index: number,
-    onChange?: VoidFunction
+    onChange?: VoidFunction,
+    onDelete?: VoidFunction
 }
 
 export interface IFieldState {
@@ -61,12 +63,14 @@ export abstract class Field<Props extends IFieldProps, State extends IFieldState
     private buttons = () => {
         const icon = this.state.hidden ? 'up' : 'down';
         return (<div className="card-actions">
-            <Button type="danger" onClick={this.toggle} shape="circle" icon="close" size="default" />
+            <Button type="danger" onClick={this.delete} shape="circle" icon="close" size="default" />
             <Button onClick={this.toggle} shape="circle" icon={icon} size="default" />
         </div>)
     }
 
+    private delete = () => this.props.onDelete && this.props.onDelete()
+
     private toggle = () => this.setState({ hidden: !this.state.hidden })
 }
 
-export type AnyField = EducationField | TextField | TitleField | WorkField;
+export type AnyField = EducationField | TextField | TitleField | WorkField | SkillField;

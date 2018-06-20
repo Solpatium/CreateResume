@@ -40,7 +40,7 @@ function addAuthentication(app) {
         })
     });
 
-    const callbackURL = process.env.NODE_ENV == 'production' ? `${process.env.APP_URL}login/${provider}/callback` : `${process.env.APP_URL}:${process.env.PORT}/login/${provider}/callback`;
+    const callbackURL = process.env.NODE_ENV == 'production' ? `${process.env.APP_URL}/login/${provider}/callback` : `${process.env.APP_URL}:${process.env.PORT}/login/${provider}/callback`;
     const strategy = new LinkedInStrategy({
         authorizationURL: 'https://www.linkedin.com/oauth/v2/authorization',
         tokenURL: 'https://www.linkedin.com/oauth/v2/accessToken',

@@ -1,0 +1,406 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WorkField renders properly 1`] = `
+<div
+  aria-roledescription="Draggable item. Press space bar to lift"
+  className="field"
+  data-react-beautiful-dnd-drag-handle="0"
+  data-react-beautiful-dnd-draggable="0"
+  draggable={false}
+  onBlur={[Function]}
+  onDragStart={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onMouseDown={[Function]}
+  onTouchStart={[Function]}
+  style={
+    Object {
+      "transform": null,
+      "transition": null,
+    }
+  }
+  tabIndex={0}
+>
+  <div
+    className="ant-card ant-card-bordered"
+  >
+    <div
+      className="ant-card-head"
+    >
+      <div
+        className="ant-card-head-wrapper"
+      >
+        <div
+          className="ant-card-head-title"
+        >
+          Work experience
+        </div>
+        <div
+          className="ant-card-extra"
+        >
+          <div
+            className="card-actions"
+          >
+            <button
+              className="ant-btn ant-btn-danger ant-btn-circle ant-btn-icon-only"
+              onClick={[Function]}
+              type="button"
+            >
+              <i
+                className="anticon anticon-close"
+              />
+            </button>
+            <button
+              className="ant-btn ant-btn-circle ant-btn-icon-only"
+              onClick={[Function]}
+              type="button"
+            >
+              <i
+                className="anticon anticon-down"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ant-card-body"
+      style={Object {}}
+    >
+      <div>
+        <div
+          className="ant-row"
+          style={undefined}
+        >
+          <div
+            className="ant-col-8"
+          >
+            <div
+              className="ant-row ant-form-item"
+              style={undefined}
+            >
+              <div
+                className="ant-form-item-label"
+              >
+                <label
+                  className=""
+                  htmlFor={null}
+                  onClick={[Function]}
+                  title="Select start date"
+                >
+                  Select start date
+                </label>
+              </div>
+              <div
+                className="ant-form-item-control-wrapper"
+              >
+                <div
+                  className="ant-form-item-control"
+                >
+                  <span
+                    className="ant-form-item-children"
+                  >
+                    <span
+                      className="ant-calendar-picker"
+                      id={undefined}
+                      onBlur={[Function]}
+                      onFocus={[Function]}
+                      style={undefined}
+                    >
+                      <div
+                        onBlur={undefined}
+                        onClick={[Function]}
+                        onContextMenu={undefined}
+                        onFocus={undefined}
+                        onKeyDown={[Function]}
+                        onMouseDown={[Function]}
+                        onMouseEnter={undefined}
+                        onMouseLeave={undefined}
+                        onTouchStart={[Function]}
+                      >
+                        <input
+                          className="ant-calendar-picker-input ant-input"
+                          disabled={undefined}
+                          placeholder="Start date"
+                          readOnly={true}
+                          value=""
+                        />
+                        <span
+                          className="ant-calendar-picker-icon"
+                        />
+                      </div>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="ant-col-8"
+          >
+            <div
+              className="ant-row ant-form-item"
+              style={undefined}
+            >
+              <div
+                className="ant-form-item-label"
+              >
+                <label
+                  className=""
+                  htmlFor={null}
+                  onClick={[Function]}
+                  title="Select end date"
+                >
+                  Select end date
+                </label>
+              </div>
+              <div
+                className="ant-form-item-control-wrapper"
+              >
+                <div
+                  className="ant-form-item-control"
+                >
+                  <span
+                    className="ant-form-item-children"
+                  >
+                    <span
+                      className="ant-calendar-picker"
+                      id={undefined}
+                      onBlur={[Function]}
+                      onFocus={[Function]}
+                      style={undefined}
+                    >
+                      <div
+                        onBlur={undefined}
+                        onClick={[Function]}
+                        onContextMenu={undefined}
+                        onFocus={undefined}
+                        onKeyDown={[Function]}
+                        onMouseDown={[Function]}
+                        onMouseEnter={undefined}
+                        onMouseLeave={undefined}
+                        onTouchStart={[Function]}
+                      >
+                        <input
+                          className="ant-calendar-picker-input ant-input"
+                          disabled={false}
+                          placeholder="End date"
+                          readOnly={true}
+                          value=""
+                        />
+                        <span
+                          className="ant-calendar-picker-icon"
+                        />
+                      </div>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <span
+              checked={false}
+              className="ant-switch"
+              defaultChecked={false}
+              onChange={[Function]}
+              onClick={[Function]}
+              onKeyDown={[Function]}
+              onMouseUp={[Function]}
+              tabIndex={0}
+            >
+              <span
+                className="ant-switch-inner"
+              />
+            </span>
+            <label>
+              Currently working
+            </label>
+          </div>
+          <div
+            className="ant-col-8"
+          >
+            <div
+              className="ant-row ant-form-item"
+              style={undefined}
+            >
+              <div
+                className="ant-form-item-label"
+              >
+                <label
+                  className=""
+                  htmlFor={null}
+                  onClick={[Function]}
+                  title="Location"
+                >
+                  Location
+                </label>
+              </div>
+              <div
+                className="ant-form-item-control-wrapper"
+              >
+                <div
+                  className="ant-form-item-control"
+                >
+                  <span
+                    className="ant-form-item-children"
+                  >
+                    <input
+                      className="ant-input"
+                      disabled={false}
+                      onChange={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="Kraków"
+                      type="text"
+                      value=""
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="ant-row"
+          style={undefined}
+        >
+          <div
+            className="ant-col-12"
+          >
+            <div
+              className="ant-row ant-form-item"
+              style={undefined}
+            >
+              <div
+                className="ant-form-item-label"
+              >
+                <label
+                  className=""
+                  htmlFor={null}
+                  onClick={[Function]}
+                  title="Company"
+                >
+                  Company
+                </label>
+              </div>
+              <div
+                className="ant-form-item-control-wrapper"
+              >
+                <div
+                  className="ant-form-item-control"
+                >
+                  <span
+                    className="ant-form-item-children"
+                  >
+                    <input
+                      className="ant-input"
+                      disabled={false}
+                      onChange={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="Google"
+                      style={
+                        Object {
+                          "width": "90%",
+                        }
+                      }
+                      type="text"
+                      value=""
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="ant-col-12"
+          >
+            <div
+              className="ant-row ant-form-item"
+              style={undefined}
+            >
+              <div
+                className="ant-form-item-label"
+              >
+                <label
+                  className=""
+                  htmlFor={null}
+                  onClick={[Function]}
+                  title="Position"
+                >
+                  Position
+                </label>
+              </div>
+              <div
+                className="ant-form-item-control-wrapper"
+              >
+                <div
+                  className="ant-form-item-control"
+                >
+                  <span
+                    className="ant-form-item-children"
+                  >
+                    <input
+                      className="ant-input"
+                      disabled={false}
+                      onChange={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="Developer"
+                      type="text"
+                      value=""
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="ant-row"
+          style={undefined}
+        >
+          <div
+            className="ant-col-48"
+          >
+            <div
+              className="ant-row ant-form-item"
+              style={undefined}
+            >
+              <div
+                className="ant-form-item-label"
+              >
+                <label
+                  className=""
+                  htmlFor={null}
+                  onClick={[Function]}
+                  title="Job Description"
+                >
+                  Job Description
+                </label>
+              </div>
+              <div
+                className="ant-form-item-control-wrapper"
+              >
+                <div
+                  className="ant-form-item-control"
+                >
+                  <span
+                    className="ant-form-item-children"
+                  >
+                    <textarea
+                      className="ant-input"
+                      onChange={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="I was doing pancakes"
+                      rows={5}
+                      style={Object {}}
+                      value=""
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

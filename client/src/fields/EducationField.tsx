@@ -11,7 +11,11 @@ interface IEducationFieldProps extends IFieldProps {
     to?: moment.Moment,
     universityName?: string,
     faculty?: string,
-    location?: string
+    location?: string,
+    startYear?: number,
+    endYear?: number,
+    startMonth?: number,
+    endMonth?: number
 }
 
 interface IEducationFieldState extends IFieldState {
@@ -19,13 +23,15 @@ interface IEducationFieldState extends IFieldState {
     to?: moment.Moment,
     universityName: string,
     faculty: string,
-    location: string
+    location: string,
 }
 
 export default class EducationField extends Field<IEducationFieldProps, IEducationFieldState> {
     constructor(props: IEducationFieldProps) {
         super(props)
-        const state: IEducationFieldState = {
+        this.state = {
+            from: props.startYear ? moment({year: props.startYear, month: props.startMonth || 0}) : undefined,
+            to: props.endYear ? moment({year: props.endYear, month: props.endMonth || 0}) : undefined,
             faculty: props.faculty ? props.faculty : '',
             hidden: false,
             id: `field-${Field.counter}`,
@@ -33,15 +39,6 @@ export default class EducationField extends Field<IEducationFieldProps, IEducati
             universityName: props.universityName ? props.universityName : '',
         }
 
-        if( props.from ) {
-            state.from = props.from;
-        }
-
-        if( props.to ) {
-            state.to = props.to;
-        }
-
-        this.state = state;
     }
 
     public get name() { return 'Education' };
@@ -51,32 +48,55 @@ export default class EducationField extends Field<IEducationFieldProps, IEducati
             <Row>
                 <Col span={8}>
                     <FormItem label="Select start date">
-                        <MonthPicker onChange={this.notifyChange} placeholder="Education start date"/>
+                        <MonthPicker value={this.state.from} onChange={this.updateStartDate} placeholder="Education start date"/>
                     </FormItem>
                 </Col>
                 <Col span={8}>
                     <FormItem label="Select end date">
-                        <MonthPicker onChange={this.notifyChange} placeholder="Education end date"/>
+                        <MonthPicker value={this.state.to} onChange={this.updateEndDate} placeholder="Education end date"/>
                     </FormItem>
                 </Col>
                 <Col span={8}>
                 <FormItem label="University location">
-                    <Input onChange={this.notifyChange} placeholder="Kraków"/>
+                    <Input value={this.state.location} onChange={this.updateLocation} placeholder="Kraków"/>
                 </FormItem>
                 </Col>
             </Row>
             <Row><Col span={24}>
             <FormItem label="University name">
-                <Input onChange={this.notifyChange} placeholder="AGH University of Science and Technology"/>
+                <Input value={this.state.universityName} onChange={this.updateUniversity} placeholder="AGH University of Science and Technology"/>
             </FormItem>
             </Col></Row>
             <Row><Col span={24}>
             <FormItem label="Faculty">
-                <Input onChange={this.notifyChange} placeholder="Faculty of Computer Science, Electronics and Telecommunication, Computer Science"/>
+                <Input value={this.state.faculty} onChange={this.updateFaculty} placeholder="Faculty of Computer Science, Electronics and Telecommunication, Computer Science"/>
             </FormItem>
             </Col></Row>
             </div>)
     }
 
-    // public update = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({value: event.target.value})
+    public updateStartDate = (from: moment.Moment, dateString: string) => {
+        this.setState({from})
+        this.notifyChange()
+    }
+
+    public updateEndDate = (to: moment.Moment, dateString: string) => {
+        this.setState({to})
+        this.notifyChange()
+    }
+
+    public updateFaculty = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({faculty: event.target.value});
+        this.notifyChange()
+    }
+
+    public updateUniversity = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({universityName: event.target.value});
+        this.notifyChange()
+    }
+
+    public updateLocation= (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({location: event.target.value});
+        this.notifyChange()
+    }
 }
